@@ -327,12 +327,12 @@ class Quality(object):
             return Quality.UNKNOWN if result is None else result
 
         # Is it UHD?
-        if ep.vres > 1445:
+        if ep.vres and ep.vres > 1445:
             is_4320 = ep.vres > 4320
             result = Quality.UHD_8K_BLURAY if is_4320 else Quality.UHD_4K_BLURAY
 
         # Is it HD?
-        elif ep.vres in [1085, 590]:
+        elif ep.vres and ep.vres > 590 and ep.vres < 1085:
             is_1080 = ep.vres > 725
             result = Quality.FULLHDBLURAY if is_1080 else Quality.HDBLURAY
         else:
